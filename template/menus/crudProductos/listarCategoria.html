@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Listado de personas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Css de Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
+    <!-- css de Iconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="alert alert-info display-3 text-center">
+            Listado de categorias
+        </div>
+
+
+
+        {% if categorias %}
+
+        <table class="table" id="miTabla">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                {% for categoria in categorias %}
+                <tr>
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.nombre_categoria}}</td>
+                <td>
+                <a href="{% url 'actualizarCategoria' categoria.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>                                  
+                <a href="{% url 'eliminarCategoria' categoria.id %}" class="btn btn-danger" data-toggle="modal" data-target="#confirmarEliminar{{ categoria.id }}"><i class="bi bi-trash"></i></a>
+
+                                            <!-- Modal de confirmación -->
+                                            <div class="modal fade" id="confirmarEliminar{{ categoria.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmarEliminarLabel{{ categoria.id }}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmarEliminarLabel{{ categoria.id }}">Confirmar Eliminación</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                    <div class="modal-body">
+                                                        ¿Estás seguro de que quieres eliminar esta categoria?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <a href="{% url 'eliminarCategoria' categoria.id %}" class="btn btn-danger">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                </td>                                   
+                {%endfor%}
+            </tbody>
+
+        </table>
+
+
+
+        {% else %}
+        <h1>No existen categorias en la DB</h1>
+        {% endif %}
+
+        <a href="{% url 'agregarCategoria' %}" class="btn btn-primary mt-5">Añadir categoria(s)</a>
+        <a href="{% url 'vistaAdmin' %}" class="btn btn-danger mt-5">Volver a panel</a>
+
+
+
+    </div>
+
+<br class="my-5">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+
+    <!-- JS de JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+    <!-- js de datatable -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+    <!-- Script para cargar datatable -->
+    <script>
+        $(document).ready(function () {
+            $('#miTabla').DataTable();
+        });
+    </script>
+
+
+</body>

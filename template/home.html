@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }}. Ya estás autenticado.</p>
+    {% else %}
+        <!-- Si el usuario no está autenticado, muestra el formulario de login -->
+        <h2>Iniciar sesión</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    {% endif %}
+</body>
+</html>
