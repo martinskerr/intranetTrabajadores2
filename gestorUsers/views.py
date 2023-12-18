@@ -19,13 +19,25 @@ def signUp(request):
 @login_required
 def vistaAdmin(request):
     if request.user.is_superuser:
-        return render(request, 'homeAdmin.html')
+        users = Usuario.objects.all()
+        data = {
+                'usuarios': users,
+                'title': 'Panel de Administración',
+                'nombre_admin': 'Martin Lopez',
+                'sucursal_admin': 'Inacap 2023 Taller de soluciones',
+                'tarea_1': 'Revisar solicitudes de vacaciones',
+                'tarea_2': 'Revisar solicitudes de permisos',
+                'tarea_3': 'Revisar solicitudes de licencias medicas',
+                'tarea_4': 'Revisar solicitudes de horas extras',
+            }
+        return render(request, 'homeAdmin.html', data)
     else:
         return render(request, 'homeUser.html')
 
 def viewUsers(request):
     users = Usuario.objects.all()
     data = {
-        'usuarios': users
+         'usuarios': users
     }
     return render(request, 'crudUsuarios/listUser.html', data)
+

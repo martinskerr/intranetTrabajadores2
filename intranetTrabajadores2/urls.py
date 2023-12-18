@@ -26,5 +26,5 @@ urlpatterns = [
     path('users/',viewUsers, name='viewUsers'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('vistaAdmin/', vistaAdmin, name='vistaAdmin'),
-    path('listarUsers', viewUsers, name='listarUsers')
+    path('listarUsers/', viewUsers, name='listarUsers')
 ]

@@ -6,13 +6,23 @@ from gestorUsers.forms import *
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from gestorUsers.models import *
+from gestorUsers.forms import *
 
 
 # Create your views here.
 
 def panel(request):
+    trabajadores = Usuario.objects.all()
     data = {
+        'usuarios': trabajadores,
         'title': 'Panel de Administración',
+        'nombre_admin': 'Martin Lopez',
+        'sucursal_admin': 'Inacap 2023 Taller de soluciones',
+        'tarea_1': 'Revisar solicitudes de vacaciones',
+        'tarea_2': 'Revisar solicitudes de permisos',
+        'tarea_3': 'Revisar solicitudes de licencias medicas',
+        'tarea_4': 'Revisar solicitudes de horas extras',
     }
     return render(request, 'homeAdmin.html', data)
 
@@ -33,10 +43,23 @@ def index(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
-def listarTrabajadores(request):
-    trabajadores = Trabajador.objects.all()
+def eliminarUsuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+    usuario.delete()
+    return redirect('listarUsers')
+
+
+def modificarUsuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
     data = {
-        'title': 'Listado de Trabajadores',
-        'trabajadores': trabajadores
+        'form': SignUpForm(instance=usuario)
     }
-    return render(request, 'listarTrabajadores.html', data)
+    if request.method == 'POST':
+        formulario = SignUpForm(data=request.POST, instance=usuario)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "Modificado correctamente"
+            data['form'] = formulario
+    return render(request, 'crudUsuarios/modificarUsuario.html', data)
+
+

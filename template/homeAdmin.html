@@ -31,7 +31,7 @@
                 <div class="container-fluid">
         
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Bienvenido {{nombreAdministrador}}</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Bienvenido {{nombre_admin}}</h1>
         
                     <!-- Row for top two containers (each 50%) -->
                     <div class="row" style="margin: 5vh;">
@@ -50,14 +50,14 @@
                             <div class="card">
                                 <h5 class="card-header">Bienvenido {{nombre_admin}}</h5>
                                 <div class="card-body">
-                                  <h5 class="card-title">Special title treatment</h5>
+                                    <h2>Sucursal: {{sucursal_admin}}</h2>
                                   <p class="card-text">
                                     <ul>
-                                        <li>{{sucursal_admin}}</li>
-                                        <li><small>{{tarea_1}}</small></li>
-                                        <li><small>{{tarea_2}}</small></li>
-                                        <li><small>{{tarea_3}}</small></li>
-                                        <li><small>{{tarea_4}}</small></li>
+                                        <h3>Mis Tareas: </h3>
+                                        <li>Tarea 1: {{tarea_1}}</li>
+                                        <li>Tarea 2: {{tarea_2}}</li>
+                                        <li>Tarea 3: {{tarea_3}}</li>
+                                        <li>Tarea 4: {{tarea_4}}</li>
                                     </ul>
                                   </p>
                                 </div>
@@ -73,36 +73,43 @@
                                 <div class="card-body">
                                   <h5 class="card-title">Mis trabajadores</h5>
                                   <p class="card-text">
-                                    <table class="table">
+
+                                    {% if usuarios %}
+
+                                    <table class="table" id="miTabla">
+                            
                                         <thead>
-                                          <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                          </tr>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Username</th>
+                                                <th>First name</th>
+                                                <th>Last name</th>
+                                                <th>Email</th>
+                                            </tr>
                                         </thead>
+                            
                                         <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>The Bird</td>
-                                            <td>@twitter</td>
-                                          </tr>
+                            
+                            
+                                            {% for usuario in usuarios %}
+                                            <tr>
+                                            <td>{{usuario.usuario.id}}</td>
+                                            <td>{{usuario.usuario.username}}</td>
+                                            <td>{{usuario.usuario.first_name}}</td>
+                                            <td>{{usuario.usuario.last_name}}</td>
+                                            <td>{{usuario.usuario.email}}</td>
+                                            </tr>
+                            
+                                            {%endfor%}
                                         </tbody>
-                                      </table>
+                            
+                                    </table>
+                            
+                            
+                            
+                                    {% else %}
+                                    <h1>No existen usuarios en la DB</h1>
+                                    {% endif %}
                                   </p>
                                 </div>
                               </div>
