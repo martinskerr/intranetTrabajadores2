@@ -14,7 +14,7 @@ def signUp(request):
             form.save()
             return redirect('vistaAdmin')
 
-    return render(request, 'createUser.html', {'form': form})
+    return render(request, 'crudUsuarios/createUser.html', {'form': form})
 
 @login_required
 def vistaAdmin(request):
@@ -28,4 +28,4 @@ def viewUsers(request):
     data = {
         'usuarios': users
     }
-    return render(request, 'users.html', data)
+    return render(request, 'crudUsuarios/listUser.html', data)

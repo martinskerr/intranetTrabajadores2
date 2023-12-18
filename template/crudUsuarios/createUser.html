@@ -23,48 +23,39 @@
                 <!-- Topbar -->
                 {% include "menus/topBar.html" %}
                 <!-- End of Topbar -->
-                <!-- Begin Page Content -->     
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    {% if productos %}
-                        <table class="table" id="miTabla">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Precio</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for producto in productos %}
-                                    <tr>
-                                        <td>{{ producto.id }}</td>
-                                        <td>{{ producto.nombre_producto }}</td>
-                                        <td>{{ producto.descripcion_producto }}</td>
-                                        <td>{{ producto.precio }}</td>                                       
-                                        <td>
-                                            <!-- Acciones de editar y eliminar -->
-                                            <a href="{% url 'actualizarProducto' producto.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>                                                                           
-                                        </td>
-                                    </tr>
+                    {% block name %}
+                    <form method="POST" style="padding-left: 15vh; padding-right: 30vh; padding-bottom: 20vh;">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">{{ error }}</div>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    {% else %}
-                        <h1>No existen productos en la base de datos todavía</h1>
-                    {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                    {% endblock %}
                 </div>
+                <!-- End of Main Content -->
+            </div>
         </div>
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            {% comment %} <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Veterinaria Chucky PB </span>
+                        <span>CooperativeGroup </span>
                     </div>
                 </div>
-            </footer>
+            </footer> {% endcomment %}
             <!-- End of Footer -->
 
         </div>
@@ -97,9 +88,5 @@
             </div>
         </div>
     </div>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-  
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
 {% endblock content %}

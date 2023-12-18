@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -21,33 +22,103 @@
 
             <!-- Main Content -->
             <div id="content">
-
+        
                 <!-- Topbar -->
-                {%include "menus/topBar.html"%}
+                {% include "menus/topBar.html" %}
                 <!-- End of Topbar -->
-
+        
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+        
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Parte del admin</h1>
-
+                    <h1 class="h3 mb-4 text-gray-800">Bienvenido {{nombreAdministrador}}</h1>
+        
+                    <!-- Row for top two containers (each 50%) -->
+                    <div class="row" style="margin: 5vh;">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <h5 class="card-header">Trabajadores activos a la fecha</h5>
+                                <div class="card-body">
+                                  <h5 class="card-title">Trabajadores</h5>
+                                  <p class="card-text">
+                                    <canvas id="myChart"></canvas>
+                                  </p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <h5 class="card-header">Bienvenido {{nombre_admin}}</h5>
+                                <div class="card-body">
+                                  <h5 class="card-title">Special title treatment</h5>
+                                  <p class="card-text">
+                                    <ul>
+                                        <li>{{sucursal_admin}}</li>
+                                        <li><small>{{tarea_1}}</small></li>
+                                        <li><small>{{tarea_2}}</small></li>
+                                        <li><small>{{tarea_3}}</small></li>
+                                        <li><small>{{tarea_4}}</small></li>
+                                    </ul>
+                                  </p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+        
+                    <!-- Row for bottom container (100%) -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                
+                                <div class="card-body">
+                                  <h5 class="card-title">Mis trabajadores</h5>
+                                  <p class="card-text">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>The Bird</td>
+                                            <td>@twitter</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                  </p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+        
                 </div>
                 <!-- /.container-fluid -->
-
+        
             </div>
             <!-- End of Main Content -->
-
+        
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Veterinaria Chucky PB </span>
-                    </div>
-                </div>
-            </footer>
+            <!-- ... -->
             <!-- End of Footer -->
-
+        
         </div>
         <!-- End of Content Wrapper -->
 
@@ -78,5 +149,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Enero', 'Marzo', 'Mayo', 'Julio', 'Septiembre', 'Noviembre'],
+                datasets: [{
+                    label: 'Trabajadores 2022',
+                    data: [Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Trabajadores 2023',
+                    data: [Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
 {% endblock content %}

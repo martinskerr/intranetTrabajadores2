@@ -31,3 +31,12 @@ def index(request):
                 pass  
 
     return render(request, 'registration/login.html', {'form': form})
+
+
+def listarTrabajadores(request):
+    trabajadores = Trabajador.objects.all()
+    data = {
+        'title': 'Listado de Trabajadores',
+        'trabajadores': trabajadores
+    }
+    return render(request, 'listarTrabajadores.html', data)
