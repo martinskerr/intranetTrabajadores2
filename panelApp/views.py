@@ -54,6 +54,22 @@ def ingresoDatosTrabajador(request):
         form = TrabajadorForm()
     return render(request, 'crudUsuarios/datosTrabajador.html', {'form': form})
 
+def actualizar_trabajador(request, id):
+    trabajador = get_object_or_404(Trabajador, id=id)
+    if request.method == 'POST':
+        form = TrabajadorForm(request.POST, instance=trabajador)
+        if form.is_valid():
+            form.save()
+            return redirect('vistaAdmin')  # Reemplaza con la URL deseada
+    else:
+        form = TrabajadorForm(instance=trabajador)
+    return render(request, 'crudUsuarios/actualizarUser.html', {'form': form})
+
+
+def eliminar_trabajador(request, id):
+    trabajador = get_object_or_404(Trabajador, id=id)
+    trabajador.delete()
+    return redirect('vistaAdmin') 
 
 
 def crearHorario(request):
