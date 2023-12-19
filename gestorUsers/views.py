@@ -19,7 +19,7 @@ def signUp(request):
 @login_required
 def vistaAdmin(request):
     if request.user.is_superuser:
-        users = Usuario.objects.all()
+        users = Trabajador.objects.all()
         data = {
                 'usuarios': users,
                 'title': 'Panel de Administración',
@@ -35,7 +35,7 @@ def vistaAdmin(request):
         return render(request, 'homeUser.html')
 
 def viewUsers(request):
-    users = Usuario.objects.all()
+    users = Trabajador.objects.all()
     data = {
          'usuarios': users
     }

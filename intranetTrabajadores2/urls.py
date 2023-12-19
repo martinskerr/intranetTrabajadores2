@@ -26,5 +26,11 @@ urlpatterns = [
     path('users/',viewUsers, name='viewUsers'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('vistaAdmin/', vistaAdmin, name='vistaAdmin'),
-    path('listarUsers/', viewUsers, name='listarUsers')
+    path('listarUsers/', viewUsers, name='listarUsers'),
+    path('modificarUsuario/<id>/', modificarUsuario, name='modificarUsuario'),
+    path('eliminarUsuario/<id>/', eliminarUsuario, name='eliminarUsuario'),
+    path('crearHorario/', crearHorario, name='crearHorario'),
+    path('ingresarArchivos/', ingresarArchivos, name='ingresarArchivos'),
+    path('listarSolicitudes', listarSolicitudes, name='listarSolicitudes'),
+    path('ingresoDatosTrabajador/', ingresoDatosTrabajador, name='ingresoDatosTrabajador')
 ]

@@ -13,7 +13,7 @@ from gestorUsers.forms import *
 # Create your views here.
 
 def panel(request):
-    trabajadores = Usuario.objects.all()
+    trabajadores = Trabajador.objects.all()
     data = {
         'usuarios': trabajadores,
         'title': 'Panel de Administración',
@@ -25,6 +25,7 @@ def panel(request):
         'tarea_4': 'Revisar solicitudes de horas extras',
     }
     return render(request, 'homeAdmin.html', data)
+
 
 def index(request):
     form = AuthenticationForm()
@@ -43,23 +44,25 @@ def index(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
-def eliminarUsuario(request, id):
-    usuario = get_object_or_404(Usuario, id=id)
-    usuario.delete()
-    return redirect('listarUsers')
-
-
-def modificarUsuario(request, id):
-    usuario = get_object_or_404(Usuario, id=id)
-    data = {
-        'form': SignUpForm(instance=usuario)
-    }
+def ingresoDatosTrabajador(request):
     if request.method == 'POST':
-        formulario = SignUpForm(data=request.POST, instance=usuario)
-        if formulario.is_valid():
-            formulario.save()
-            data['mensaje'] = "Modificado correctamente"
-            data['form'] = formulario
-    return render(request, 'crudUsuarios/modificarUsuario.html', data)
+        form = TrabajadorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('vistaAdmin')  # Reemplaza con la URL deseada
+    else:
+        form = TrabajadorForm()
+    return render(request, 'crudUsuarios/datosTrabajador.html', {'form': form})
 
 
+
+def crearHorario(request):
+    # horario = Horario.objects.all().order_by('dia', 'hora_inicio')
+    # return render(request, 'horariosTrabajadores/horario.html', {'horario': horario})
+    pass
+
+def ingresarArchivos(request):
+    return render(request, 'ingresarArchivos.html')
+
+def listarSolicitudes(request):
+    return render(request, 'listarSolicitudes.html')

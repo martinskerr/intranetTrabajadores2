@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class=""></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Panel de Navegacion {{nombre_admin}}</div>
+        <div class="sidebar-brand-text mx-3">Panel de Navegacion</div>
     </a>
 
     <!-- Divider -->
@@ -31,22 +31,22 @@
     <hr class="sidebar-divider d-none d-md-block">
 
      <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
-            aria-expanded="true" aria-controls="collapseUsuarios">
+     <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+           aria-expanded="true" aria-controls="collapseUsuarios">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Trabajadores</span>
         </a>
-        <div id="collapseUsuarios" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="collapseUsuarios" class="collapse show" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                
                 <a class="collapse-item" href="{% url 'listarUsers' %}">Mis trabajadores</a>
                 <a class="collapse-item" href="{% url 'signUp' %}">Ingresar nuevo trabajador</a>
-                {% comment %} <a class="collapse-item" href="{% url 'crearHorario' %}">Crear Horario Trabajador</a>
-                <a class="collapse-item" href="{% url 'IngresarArchivos' %}">Ingresar archivos</a>
-                <a class="collapse-item" href="{% url 'listarSolicitudes' %}">Ver mis solicitudes</a> {% endcomment %}
-
+                <a class="collapse-item" href="{% url 'ingresoDatosTrabajador' %}">Rellenar datos trabajadores</a>
+                <a class="collapse-item" href="{% url 'crearHorario' %}">Crear Horario Trabajador</a>
+                <a class="collapse-item" href="{% url 'ingresarArchivos' %}">Ingresar archivos</a>
+                <a class="collapse-item" href="{% url 'listarSolicitudes' %}">Ver mis solicitudes</a>
+                
             </div>
         </div>
     </li>

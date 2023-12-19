@@ -8,11 +8,6 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=55, required=True)
     last_name = forms.CharField(max_length=55, required=True)
     email = forms.EmailField(max_length=100, required=True)
-    tipocontrato = forms.ModelChoiceField(queryset=TipoContrato.objects.all())
-    cargo = forms.ModelChoiceField(queryset=Cargo.objects.all())
-    seccion = forms.ModelChoiceField(queryset=Seccion.objects.all())
-    area = forms.ModelChoiceField(queryset=Area.objects.all())
-    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all())
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
 
@@ -20,11 +15,6 @@ class SignUpForm(UserCreationForm):
     first_name.widget.attrs.update({'class': 'form-control'})
     last_name.widget.attrs.update({'class': 'form-control'})
     email.widget.attrs.update({'class': 'form-control'})
-    tipocontrato.widget.attrs.update({'class': 'form-control'})
-    cargo.widget.attrs.update({'class': 'form-control'})
-    seccion.widget.attrs.update({'class': 'form-control'})
-    area.widget.attrs.update({'class': 'form-control'})
-    empresa.widget.attrs.update({'class': 'form-control'})
     password1.widget.attrs.update({'class': 'form-control'})
     password2.widget.attrs.update({'class': 'form-control'})
 
@@ -34,10 +24,28 @@ class SignUpForm(UserCreationForm):
                   'first_name',
                   'last_name',
                   'email',
-                  'tipocontrato',
-                  'cargo',
-                  'seccion',
-                  'area',
-                  'empresa',
                   'password1',
                   'password2')
+        
+class TrabajadorForm(forms.ModelForm):
+    class Meta:
+        model = Trabajador
+        fields = ['rut_trabajador', 'nombre_trabajador', 'apellido_trabajador', 
+                  'fecha_nacimiento', 'telefono', 'direccion', 
+                  'fecha_inicio_contrato', 'fecha_termino_contrato', 
+                  'tipo_contrato', 'cargo', 'area', 'empresa', 'usuario']
+        widgets = {
+            'rut_trabajador': forms.TextInput(attrs={'class': 'form-control'}),
+            'nombre_trabajador': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellido_trabajador': forms.TextInput(attrs={'class': 'form-control'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'telefono': forms.NumberInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'fecha_inicio_contrato': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'fecha_termino_contrato': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'tipo_contrato': forms.Select(attrs={'class': 'form-control'}),
+            'cargo': forms.Select(attrs={'class': 'form-control'}),
+            'area': forms.Select(attrs={'class': 'form-control'}),
+            'empresa': forms.Select(attrs={'class': 'form-control'}),
+            'usuario': forms.Select(attrs={'class': 'form-control'}),
+        }

@@ -24,55 +24,23 @@
                 {% include "menus/topBar.html" %}
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    {% block name %}
-                    {% if usuarios %}
-
-                    <table class="table" id="miTabla">
-            
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Contrato</th>
-                                <th>Telefono</th>
-                                <th>Area</th>
-                                <th>Cargo</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-            
-                        <tbody>
-            
-            
-                            {% for usuario in usuarios %}
-                            <tr>
-                            <td>{{usuario.id}}</td>
-                            <td>{{usuario.nombre_trabajador}}</td>
-                            <td>{{usuario.apellido_trabajador}}</td>
-                            <td>{{usuario.tipo_contrato}}</td>
-                            <td>{{usuario.telefono}}</td>
-                            <td>{{usuario.area}}</td>
-                            <td>{{usuario.cargo}}</td>
-                            <td>
-
-                                <span class="badge badge-success">Activo</span>
-
-                            </tr>
-            
-                            {%endfor%}
-                        </tbody>
-            
-                    </table>
-            
-            
-            
-                    {% else %}
-                    <h1>No existen usuarios en la DB</h1>
-                    {% endif %}
-                    {% endblock %}
-                </div>
+                <h1>Horario Semanal</h1>
+                <table>
+                    <tr>
+                        <th>Día</th>
+                        <th>Hora de Inicio</th>
+                        <th>Hora de Fin</th>
+                        <th>Actividad</th>
+                    </tr>
+                    {% for item in horario %}
+                    <tr>
+                        <td>{{ item.dia }}</td>
+                        <td>{{ item.hora_inicio }}</td>
+                        <td>{{ item.hora_fin }}</td>
+                        <td>{{ item.actividad }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 <!-- End of Main Content -->
             </div>
         </div>

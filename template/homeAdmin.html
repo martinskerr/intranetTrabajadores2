@@ -81,10 +81,13 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Username</th>
                                                 <th>First name</th>
                                                 <th>Last name</th>
-                                                <th>Email</th>
+                                                <th>Contrato</th>
+                                                <th>Telefono</th>
+                                                <th>Area</th>
+                                                <th>Cargo</th>
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
                             
@@ -93,11 +96,17 @@
                             
                                             {% for usuario in usuarios %}
                                             <tr>
-                                            <td>{{usuario.usuario.id}}</td>
-                                            <td>{{usuario.usuario.username}}</td>
-                                            <td>{{usuario.usuario.first_name}}</td>
-                                            <td>{{usuario.usuario.last_name}}</td>
-                                            <td>{{usuario.usuario.email}}</td>
+                                            <td>{{usuario.id}}</td>
+                                            <td>{{usuario.nombre_trabajador}}</td>
+                                            <td>{{usuario.apellido_trabajador}}</td>
+                                            <td>{{usuario.tipo_contrato}}</td>
+                                            <td>{{usuario.telefono}}</td>
+                                            <td>{{usuario.area}}</td>
+                                            <td>{{usuario.cargo}}</td>
+                                            <td>
+
+                                                <span class="badge badge-success">Activo</span>
+
                                             </tr>
                             
                                             {%endfor%}

@@ -25,8 +25,10 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <h2>Registrar Trabajador </h2>
                     {% block name %}
                     <form method="POST" style="padding-left: 15vh; padding-right: 30vh; padding-bottom: 20vh;">
+
                         {% csrf_token %}
                         {% for field in form %}
                             <div class="form-group">

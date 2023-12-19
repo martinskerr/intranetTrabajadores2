@@ -24,53 +24,14 @@
                 {% include "menus/topBar.html" %}
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style ='padding-left: 60vh; padding-right: 60vh'>
+                    <h2>Rellenar Datos Trabajador </h2>
                     {% block name %}
-                    {% if usuarios %}
-
-                    <table class="table" id="miTabla">
-            
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Contrato</th>
-                                <th>Telefono</th>
-                                <th>Area</th>
-                                <th>Cargo</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-            
-                        <tbody>
-            
-            
-                            {% for usuario in usuarios %}
-                            <tr>
-                            <td>{{usuario.id}}</td>
-                            <td>{{usuario.nombre_trabajador}}</td>
-                            <td>{{usuario.apellido_trabajador}}</td>
-                            <td>{{usuario.tipo_contrato}}</td>
-                            <td>{{usuario.telefono}}</td>
-                            <td>{{usuario.area}}</td>
-                            <td>{{usuario.cargo}}</td>
-                            <td>
-
-                                <span class="badge badge-success">Activo</span>
-
-                            </tr>
-            
-                            {%endfor%}
-                        </tbody>
-            
-                    </table>
-            
-            
-            
-                    {% else %}
-                    <h1>No existen usuarios en la DB</h1>
-                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Guardar</button>
+                    </form>
                     {% endblock %}
                 </div>
                 <!-- End of Main Content -->
