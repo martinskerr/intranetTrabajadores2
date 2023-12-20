@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from gestorUsers.forms import *
@@ -26,7 +27,11 @@ def panel(request):
     }
     return render(request, 'homeAdmin.html', data)
 
+def isSuperUser(user):
+    return user.is_superuser
 
+
+@user_passes_test(isSuperUser)
 def index(request):
     form = AuthenticationForm()
     if request.method == 'POST':
@@ -35,11 +40,11 @@ def index(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            if request.user.is_superuser:
                 login(request, user)
                 return redirect('vistaAdmin')  
             else:
-                pass  
+                return redirect('vistaUser')  
 
     return render(request, 'registration/login.html', {'form': form})
 
