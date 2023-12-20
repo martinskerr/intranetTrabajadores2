@@ -40,8 +40,13 @@ def post_login_redirect(request):
 # Vista para el usuario normal
 @login_required
 def home_user(request):
-    # Lógica específica para la página de inicio del usuario
-    return render(request, 'homeUser.html')
+    usuario_actual = request.user
+    try:
+        trabajador = Trabajador.objects.get(usuario__usuario=usuario_actual)
+    except Trabajador.DoesNotExist:
+        trabajador = None
+
+    return render(request, 'homeUser.html', {'trabajador': trabajador})
 
 # Vista para el administrador
 @login_required

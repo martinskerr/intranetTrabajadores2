@@ -25,18 +25,31 @@
                 <!-- Topbar -->
                 {%include "menus/topBar.html"%}
                 <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
+                
+                {% if trabajador %}
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Parte del usuario</h1>
-                    <p>RUT: {{ trabajador.rut_trabajador }}</p>
-                    <p>Nombre: {{ trabajador.nombre_trabajador }}</p>
-                    <p>Apellido: {{ trabajador.apellido_trabajador }}</p>
-                    
-
+                <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Datos de Trabajador</h1>
+                        <p>RUT: {{ trabajador.rut_trabajador }}</p>
+                        <p>Nombre: {{ trabajador.nombre_trabajador }}</p>
+                        <p>Apellido: {{ trabajador.apellido_trabajador }}</p>
+                        <p>Fecha nacimiento: {{ trabajador.fecha_nacimiento }}</p>
+                        <p>Telefono: {{ trabajador.telefono }}</p>
+                        <p>Dirección: {{ trabajador.direccion }}</p>
+                        <p>Fecha inicio de contrato: {{ trabajador.fecha_inicio_contrato }}</p>
+                        <p>Fecha fin de contrato: {{ trabajador.fecha_termino_contrato }}</p>
+                        <p>Tipo de contrato: {{ trabajador.tipo_contrato }}</p>
+                        <p>Cargo: {{ trabajador.cargo }}</p>
+                        <p>Area: {{ trabajador.area }}</p>
+                        <p>Empresa: {{ trabajador.empresa }}</p>
+                        
+                        
+                    </div>
+                {% else %}
+                <div class="container-fluid">
+                    <p>No se encontraron datos del trabajador para este usuario.</p>
                 </div>
+                {% endif %}
                 <!-- /.container-fluid -->
 
             </div>
