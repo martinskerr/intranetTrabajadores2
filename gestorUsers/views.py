@@ -13,6 +13,7 @@ def signUp(request):
         if form.is_valid():
             form.save()
             return redirect('vistaAdmin')
+        
 
     return render(request, 'crudUsuarios/createUser.html', {'form': form})
 
