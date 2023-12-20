@@ -34,6 +34,11 @@ def vistaAdmin(request):
         return render(request, 'homeAdmin.html', data)
     else:
         return render(request, 'homeUser.html')
+    
+@login_required
+def vistaUser(request):
+    return render(request,'homeUser.html')
+
 
 def viewUsers(request):
     users = Trabajador.objects.all()
