@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from gestorUsers.models import *
 from gestorUsers.forms import *
+from django.contrib import messages
 
 
 # Create your views here.
