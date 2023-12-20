@@ -29,19 +29,46 @@
                 {% if trabajador %}
                 <div class="container-fluid">
                 <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Datos de Trabajador</h1>
-                        <p>RUT: {{ trabajador.rut_trabajador }}</p>
-                        <p>Nombre: {{ trabajador.nombre_trabajador }}</p>
-                        <p>Apellido: {{ trabajador.apellido_trabajador }}</p>
-                        <p>Fecha nacimiento: {{ trabajador.fecha_nacimiento }}</p>
-                        <p>Telefono: {{ trabajador.telefono }}</p>
-                        <p>Dirección: {{ trabajador.direccion }}</p>
-                        <p>Fecha inicio de contrato: {{ trabajador.fecha_inicio_contrato }}</p>
-                        <p>Fecha fin de contrato: {{ trabajador.fecha_termino_contrato }}</p>
-                        <p>Tipo de contrato: {{ trabajador.tipo_contrato }}</p>
-                        <p>Cargo: {{ trabajador.cargo }}</p>
-                        <p>Area: {{ trabajador.area }}</p>
-                        <p>Empresa: {{ trabajador.empresa }}</p>
+                        <div class="row" style="margin: 5vh;">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Bienvenido a tu oficina</h5>
+                                      <p class="card-text">
+                                        <p>Nombre: {{ trabajador.nombre_trabajador }}</p>
+                                        <p>Cargo: {{ trabajador.cargo }}</p>
+                                        <p>Area: {{ trabajador.area }}</p>
+                                        <p>Empresa: {{ trabajador.empresa }}</p>
+                                      </p>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <h5 class="card-header">Mi fich</h5>
+                                    <div class="card-body">
+                                        
+                                      <p class="card-text">
+                                        <ul>
+                                            <h1 class="h3 mb-4 text-gray-800">Datos de Trabajador</h1>
+                                            <p>RUT: {{ trabajador.rut_trabajador }}</p>
+                                            <p>Nombre: {{ trabajador.nombre_trabajador }}</p>
+                                            <p>Apellido: {{ trabajador.apellido_trabajador }}</p>
+                                            <p>Fecha nacimiento: {{ trabajador.fecha_nacimiento }}</p>
+                                            <p>Telefono: {{ trabajador.telefono }}</p>
+                                            <p>Dirección: {{ trabajador.direccion }}</p>
+                                            <p>Fecha inicio de contrato: {{ trabajador.fecha_inicio_contrato }}</p>
+                                            <p>Fecha fin de contrato: {{ trabajador.fecha_termino_contrato }}</p>
+                                            <p>Tipo de contrato: {{ trabajador.tipo_contrato }}</p>
+                                            <p>Cargo: {{ trabajador.cargo }}</p>
+                                            <p>Area: {{ trabajador.area }}</p>
+                                            <p>Empresa: {{ trabajador.empresa }}</p>
+                                        </ul>
+                                      </p>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
                         
                         
                     </div>
