@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from gestorUsers.forms import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from gestorUsers.models import *
@@ -14,7 +14,38 @@ from django.contrib import messages
 
 # Create your views here.
 
-def panel(request):
+def index(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('post_login_redirect')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'registration/login.html', {'form': form})
+
+# Vista de redirección post-login
+@login_required
+def post_login_redirect(request):
+    if request.user.is_superuser:
+        return redirect('vistaAdmin')
+    else:
+        return redirect('vistaUser')
+
+# Vista para el usuario normal
+@login_required
+def home_user(request):
+    # Lógica específica para la página de inicio del usuario
+    return render(request, 'homeUser.html')
+
+# Vista para el administrador
+@login_required
+def home_admin(request):
     trabajadores = Trabajador.objects.all()
     data = {
         'usuarios': trabajadores,
@@ -28,26 +59,10 @@ def panel(request):
     }
     return render(request, 'homeAdmin.html', data)
 
-def isSuperUser(user):
-    return user.is_superuser
-
-
-@user_passes_test(isSuperUser)
-def index(request):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if request.user.is_superuser:
-                login(request, user)
-                return redirect('vistaAdmin')  
-            else:
-                return redirect('vistaUser')  
-
-    return render(request, 'registration/login.html', {'form': form})
+# Vista para cerrar sesión
+def logout_view(request):
+    logout(request)
+    return redirect('index')  # Redirige a la vista de inicio de sesión
 
 
 def ingresoDatosTrabajador(request):

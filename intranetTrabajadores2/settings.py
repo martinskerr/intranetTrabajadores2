@@ -136,7 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 """Pagina post login"""
-LOGIN_REDIRECT_URL = "/vistaUser/"
+LOGIN_REDIRECT_URL = 'post_login_redirect'
 
 """Pagina post logout"""
 LOGOUT_REDIRECT_URL = "/accounts/login/"
